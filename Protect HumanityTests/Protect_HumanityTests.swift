@@ -78,7 +78,7 @@ class Protect_HumanityTests: XCTestCase {
     }
 
     func testZombieMovementBehavior() throws {
-        let civi = Civi(target: Location(row: 5, col: 5), location: Location(row: 5, col: 5))
+        let civi = Civi(target: Location(row: 5, col: 3), location: Location(row: 5, col: 3))
         var sut = Zombie(target: Location(row: 0, col: 0), location: Location(row: 0, col: 0))
         
         var mobs : [MobileEntity] = [
@@ -93,8 +93,20 @@ class Protect_HumanityTests: XCTestCase {
         
        
         XCTAssertEqual(sut.location.row, 5)
-        XCTAssertEqual(sut.location.col, 5)
-      
-        
+        XCTAssertEqual(sut.location.col, 3)
     }
+    func testCiviMovementBehavior() throws {
+        var sut = Civi(target: Location(row: 0, col: 1), location: Location(row: 0, col: 1))
+        let zombie = Zombie(target: Location(row: 0, col: 0), location: Location(row: 0, col: 0))
+        
+        var mobs : [MobileEntity] = [
+        zombie, sut
+        ]
+    
+        mobs = sut.doMovementBehavior(mobs: mobs)
+       
+        XCTAssertEqual(sut.location.row, 1)
+        XCTAssertEqual(sut.location.col, 2)
+    }
+    
 }

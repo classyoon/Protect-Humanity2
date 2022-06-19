@@ -30,6 +30,7 @@ protocol MobileEntity {
     mutating func doMovementBehavior(mobs: [MobileEntity]) -> [MobileEntity]
 }
 extension MobileEntity {
+
     mutating func moveTo(target : Location){
         location.row = Constants.safeRow(row: target.row)
         location.col = Constants.safeCol(col: target.col)
@@ -101,20 +102,18 @@ struct Civi : MobileEntity, Identifiable {
         var nearestIndex : Int = Int.max
         for index in 0..<mobs.count {
             if mobs[index].name == "🧟" {
-              let rowDistance = abs(location.row - mobs[index].location.row)
-               let colDistance = abs(location.col - mobs[index].location.col)
+                let rowDistance = abs(location.row - mobs[index].location.row)
+                let colDistance = abs(location.col - mobs[index].location.col)
                 let distance = rowDistance + colDistance
-                if distance<shortestDistance {
-                    shortestDistance=distance
-                    nearestIndex=index
+                if distance < shortestDistance {
+                    shortestDistance = distance
+                    nearestIndex = index
                     print("Zombie is close!!! About \(distance) meters away!")
                 }
             }
         }
         if shortestDistance < Int.max {
-            setTarget(newTarget: Location(row: Constants.safeRow(row: mobs[nearestIndex].location.row+Constants.rowMax/2),col: Constants.safeCol(col:mobs[nearestIndex].location.col+Constants.colMax/2)))
-//            setTarget(newTarget: Location(row: Constants.safeRow(row: mobs[nearestIndex].location.row+2),col: Constants.safeCol(col:mobs[nearestIndex].location.col+2)))
-            print("I'll run to \(target)")
+            setTarget(newTarget: Location(row: Constants.safeRow(row: mobs[nearestIndex].location.row + Constants.rowMax/2),col: Constants.safeCol(col:mobs[nearestIndex].location.col + Constants.colMax/2)))
         }
         moveTowardsTarget()
         return mobs
@@ -122,8 +121,8 @@ struct Civi : MobileEntity, Identifiable {
 }
 
 struct Constants {
-    static let colMax = 4
-    static let rowMax = 6
+    static let colMax = 9
+    static let rowMax = 11
     static func safeRow(row: Int)-> Int {
         let r = row % Constants.rowMax
         if r < 0 {
@@ -154,11 +153,11 @@ class WorldVM : ObservableObject {
     init(){
         grid = Array(repeating: Array(repeating: Tile(), count: Constants.colMax), count: Constants.rowMax)
         
-        mobs.append(Zombie(location: Location(row: 0, col: 0)))
-        mobs.append(Civi(location: Location(row: 2, col: 2)))
+        mobs.append(Zombie(location: Location(row: 10, col: 10)))
+        mobs.append(Civi(location: Location(row: 0, col: 0)))
 //        mobs.append(Zombie(location: Location(row: 5, col: 1)))
-        mobs[0].setTarget(newTarget: Location(row: 0, col: 0))
-        mobs[1].setTarget(newTarget: Location(row: 2, col: 2))
+        mobs[0].setTarget(newTarget: Location(row: 2, col: 2))
+        mobs[1].setTarget(newTarget: Location(row: 0, col: 0))
 //        mobs[2].setTarget(newTarget: Location(row: 1, col: 2))
     }
 }
@@ -181,7 +180,7 @@ struct WorldView: View {
             }
             Button {
                 for index in 0..<vm.mobs.count {
-                vm.mobs[index].doMovementBehavior(mobs: vm.mobs)
+                _ = vm.mobs[index].doMovementBehavior(mobs: vm.mobs)
                 }
             } label: {
                 Text("Do Something")

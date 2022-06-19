@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA2F0FDC285FE5B70037B8C6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2F0FDB285FE5B70037B8C6 /* Constants.swift */; };
+		CA2F0FDE285FE7C30037B8C6 /* Mobile Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2F0FDD285FE7C30037B8C6 /* Mobile Entities.swift */; };
+		CA2F0FE0285FE7F80037B8C6 /* WorldVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2F0FDF285FE7F80037B8C6 /* WorldVM.swift */; };
 		CA592F4E285A816500DB9C6E /* Protect_HumanityApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA592F4D285A816500DB9C6E /* Protect_HumanityApp.swift */; };
 		CA592F50285A816500DB9C6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA592F4F285A816500DB9C6E /* ContentView.swift */; };
 		CA592F52285A816600DB9C6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA592F51285A816600DB9C6E /* Assets.xcassets */; };
@@ -25,6 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA2F0FDB285FE5B70037B8C6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CA2F0FDD285FE7C30037B8C6 /* Mobile Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mobile Entities.swift"; sourceTree = "<group>"; };
+		CA2F0FDF285FE7F80037B8C6 /* WorldVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldVM.swift; sourceTree = "<group>"; };
 		CA592F4A285A816500DB9C6E /* Protect_Humanity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Protect_Humanity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA592F4D285A816500DB9C6E /* Protect_HumanityApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protect_HumanityApp.swift; sourceTree = "<group>"; };
 		CA592F4F285A816500DB9C6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -73,8 +79,11 @@
 		CA592F4C285A816500DB9C6E /* Protect Humanity */ = {
 			isa = PBXGroup;
 			children = (
+				CA2F0FDB285FE5B70037B8C6 /* Constants.swift */,
 				CA592F4D285A816500DB9C6E /* Protect_HumanityApp.swift */,
 				CA592F4F285A816500DB9C6E /* ContentView.swift */,
+				CA2F0FDF285FE7F80037B8C6 /* WorldVM.swift */,
+				CA2F0FDD285FE7C30037B8C6 /* Mobile Entities.swift */,
 				CA592F51285A816600DB9C6E /* Assets.xcassets */,
 				CA592F53285A816600DB9C6E /* Preview Content */,
 			);
@@ -198,7 +207,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA592F50285A816500DB9C6E /* ContentView.swift in Sources */,
+				CA2F0FDE285FE7C30037B8C6 /* Mobile Entities.swift in Sources */,
+				CA2F0FE0285FE7F80037B8C6 /* WorldVM.swift in Sources */,
 				CA592F4E285A816500DB9C6E /* Protect_HumanityApp.swift in Sources */,
+				CA2F0FDC285FE5B70037B8C6 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

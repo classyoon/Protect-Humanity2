@@ -11,18 +11,38 @@
 		CA592F50285A816500DB9C6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA592F4F285A816500DB9C6E /* ContentView.swift */; };
 		CA592F52285A816600DB9C6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA592F51285A816600DB9C6E /* Assets.xcassets */; };
 		CA592F55285A816600DB9C6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA592F54285A816600DB9C6E /* Preview Assets.xcassets */; };
+		CA9A7734285F96FC008BF79B /* Protect_HumanityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A7733285F96FC008BF79B /* Protect_HumanityTests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CA9A7735285F96FC008BF79B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA592F42285A816500DB9C6E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA592F49285A816500DB9C6E;
+			remoteInfo = "Protect Humanity";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		CA592F4A285A816500DB9C6E /* Protect Humanity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Protect Humanity.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA592F4A285A816500DB9C6E /* Protect_Humanity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Protect_Humanity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA592F4D285A816500DB9C6E /* Protect_HumanityApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protect_HumanityApp.swift; sourceTree = "<group>"; };
 		CA592F4F285A816500DB9C6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CA592F51285A816600DB9C6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA592F54285A816600DB9C6E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CA9A7731285F96FC008BF79B /* Protect_HumanityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Protect_HumanityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA9A7733285F96FC008BF79B /* Protect_HumanityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protect_HumanityTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CA592F47285A816500DB9C6E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA9A772E285F96FC008BF79B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -36,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				CA592F4C285A816500DB9C6E /* Protect Humanity */,
+				CA9A7732285F96FC008BF79B /* Protect HumanityTests */,
 				CA592F4B285A816500DB9C6E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,7 +64,8 @@
 		CA592F4B285A816500DB9C6E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CA592F4A285A816500DB9C6E /* Protect Humanity.app */,
+				CA592F4A285A816500DB9C6E /* Protect_Humanity.app */,
+				CA9A7731285F96FC008BF79B /* Protect_HumanityTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,12 +89,20 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		CA9A7732285F96FC008BF79B /* Protect HumanityTests */ = {
+			isa = PBXGroup;
+			children = (
+				CA9A7733285F96FC008BF79B /* Protect_HumanityTests.swift */,
+			);
+			path = "Protect HumanityTests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CA592F49285A816500DB9C6E /* Protect Humanity */ = {
+		CA592F49285A816500DB9C6E /* Protect_Humanity */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CA592F58285A816600DB9C6E /* Build configuration list for PBXNativeTarget "Protect Humanity" */;
+			buildConfigurationList = CA592F58285A816600DB9C6E /* Build configuration list for PBXNativeTarget "Protect_Humanity" */;
 			buildPhases = (
 				CA592F46285A816500DB9C6E /* Sources */,
 				CA592F47285A816500DB9C6E /* Frameworks */,
@@ -82,10 +112,28 @@
 			);
 			dependencies = (
 			);
-			name = "Protect Humanity";
+			name = Protect_Humanity;
 			productName = "Protect Humanity";
-			productReference = CA592F4A285A816500DB9C6E /* Protect Humanity.app */;
+			productReference = CA592F4A285A816500DB9C6E /* Protect_Humanity.app */;
 			productType = "com.apple.product-type.application";
+		};
+		CA9A7730285F96FC008BF79B /* Protect_HumanityTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA9A7739285F96FC008BF79B /* Build configuration list for PBXNativeTarget "Protect_HumanityTests" */;
+			buildPhases = (
+				CA9A772D285F96FC008BF79B /* Sources */,
+				CA9A772E285F96FC008BF79B /* Frameworks */,
+				CA9A772F285F96FC008BF79B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA9A7736285F96FC008BF79B /* PBXTargetDependency */,
+			);
+			name = Protect_HumanityTests;
+			productName = "Protect HumanityTests";
+			productReference = CA9A7731285F96FC008BF79B /* Protect_HumanityTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -100,9 +148,13 @@
 					CA592F49285A816500DB9C6E = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
+					CA9A7730285F96FC008BF79B = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = CA592F49285A816500DB9C6E;
+					};
 				};
 			};
-			buildConfigurationList = CA592F45285A816500DB9C6E /* Build configuration list for PBXProject "Protect Humanity" */;
+			buildConfigurationList = CA592F45285A816500DB9C6E /* Build configuration list for PBXProject "Protect_Humanity" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +167,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CA592F49285A816500DB9C6E /* Protect Humanity */,
+				CA592F49285A816500DB9C6E /* Protect_Humanity */,
+				CA9A7730285F96FC008BF79B /* Protect_HumanityTests */,
 			);
 		};
 /* End PBXProject section */
@@ -127,6 +180,13 @@
 			files = (
 				CA592F55285A816600DB9C6E /* Preview Assets.xcassets in Resources */,
 				CA592F52285A816600DB9C6E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA9A772F285F96FC008BF79B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +202,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CA9A772D285F96FC008BF79B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA9A7734285F96FC008BF79B /* Protect_HumanityTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CA9A7736285F96FC008BF79B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA592F49285A816500DB9C6E /* Protect_Humanity */;
+			targetProxy = CA9A7735285F96FC008BF79B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CA592F56285A816600DB9C6E /* Debug */ = {
@@ -317,10 +393,46 @@
 			};
 			name = Release;
 		};
+		CA9A7737285F96FC008BF79B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2LC23ZWZCU;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.conner.yoon.Protect-HumanityTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Protect_Humanity.app/Protect_Humanity";
+			};
+			name = Debug;
+		};
+		CA9A7738285F96FC008BF79B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2LC23ZWZCU;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.conner.yoon.Protect-HumanityTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Protect_Humanity.app/Protect_Humanity";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CA592F45285A816500DB9C6E /* Build configuration list for PBXProject "Protect Humanity" */ = {
+		CA592F45285A816500DB9C6E /* Build configuration list for PBXProject "Protect_Humanity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CA592F56285A816600DB9C6E /* Debug */,
@@ -329,11 +441,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CA592F58285A816600DB9C6E /* Build configuration list for PBXNativeTarget "Protect Humanity" */ = {
+		CA592F58285A816600DB9C6E /* Build configuration list for PBXNativeTarget "Protect_Humanity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CA592F59285A816600DB9C6E /* Debug */,
 				CA592F5A285A816600DB9C6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA9A7739285F96FC008BF79B /* Build configuration list for PBXNativeTarget "Protect_HumanityTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA9A7737285F96FC008BF79B /* Debug */,
+				CA9A7738285F96FC008BF79B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

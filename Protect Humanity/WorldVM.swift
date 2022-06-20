@@ -18,10 +18,10 @@ class WorldVM : ObservableObject {
     init(){
         grid = Array(repeating: Array(repeating: Tile(), count: Constants.colMax), count: Constants.rowMax)
         
-        mobs.append(Zombie(location: Location(row: 4, col: 3)))
-        mobs.append(Civi(location: Location(row: 0, col: 0)))
+        mobs.append(Zombie(location: Location(row: 0, col: 0)))
+        mobs.append(Civi(location: Location(row: 2, col: 2)))
 //        mobs.append(Zombie(location: Location(row: 5, col: 1)))
-        mobs[0].setTarget(newTarget: Location(row: 2, col: 2))
+        mobs[0].setTarget(newTarget: Location(row: 0, col: 0))
         mobs[1].setTarget(newTarget: Location(row: 0, col: 0))
 //        mobs[2].setTarget(newTarget: Location(row: 1, col: 2))
     }

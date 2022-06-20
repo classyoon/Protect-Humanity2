@@ -20,20 +20,10 @@ struct WorldView: View {
                             Rectangle() .fill(Color.green)
                                 .onTapGesture {
                                 }
-                                                        
                         }
-                        
                     }
                 }
             }
-            Button {
-                for index in 0..<vm.mobs.count {
-                _ = vm.mobs[index].doMovementBehavior(mobs: vm.mobs)
-                }
-            } label: {
-                Text("Do Something")
-            }
-
         }
     }
 }
@@ -69,16 +59,40 @@ struct GridView: View {
     }
 }
 struct ContentView: View {
+    @State var isPlaying = false
+    var timer = Timer.publish(every: 1.0 , on: .main, in: .common).autoconnect()
     @StateObject var vm = WorldVM()
     
     var body: some View {
-        ZStack{
-            WorldView(vm: vm)
-            GridView(vm: vm)
+        VStack {
+            ZStack{
+                WorldView(vm: vm)
+                GridView(vm: vm)
+            }
+            .onReceive(timer) { _ in
+                if isPlaying {
+                    for index in 0..<vm.mobs.count {
+                        _ = vm.mobs[index].doMovementBehavior(mobs: vm.mobs)
+                    }
+                }
+            }
+            HStack{
+                Button {
+                    isPlaying.toggle()
+                } label: {
+                    Text(isPlaying ? "Stop" : "Play")
+                }
+                Button {
+                    for index in 0..<vm.mobs.count {
+                        _ = vm.mobs[index].doMovementBehavior(mobs: vm.mobs)
+                    }
+                } label: {
+                    Text("Next")
+                }
+            }
         }
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

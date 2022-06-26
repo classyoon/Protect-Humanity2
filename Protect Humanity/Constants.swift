@@ -7,16 +7,17 @@
 
 import Foundation
 struct Constants {
-    static let colMax = 9
-    static let rowMax = 11
-    static func safeRow(row: Int)-> Int {
+    static let colMax = 10
+    static let rowMax = 10
+    
+    static func safeRow(_ row: Int)-> Int {//INOUT????
         let r = row % Constants.rowMax
         if r < 0 {
             return r + Constants.rowMax
         }
         return r
     }
-   static func safeCol(col: Int)-> Int {
+   static func safeCol(_ col: Int)-> Int {
        let c = col % Constants.colMax
        if c < 0 {
            return c + Constants.colMax

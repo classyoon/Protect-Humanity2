@@ -19,17 +19,21 @@ struct WorldView: View {
                         ZStack{
                             Rectangle() .fill(Color.green)
                                 .onTapGesture {
+                                    vm.handleTap(tapSpot: Location(row, col))
                                 }
+                            }
                         }
                     }
                 }
             }
         }
-    }
+
 }
 
 struct GridView: View {
     @ObservedObject var vm : WorldVM
+    let increment = 5
+    let barHeight = 10
     var body: some View {
         VStack{
             ForEach(0..<Constants.rowMax, id:\.self){ row in
@@ -38,16 +42,18 @@ struct GridView: View {
                         ZStack{
                             Rectangle() .fill(Color.clear)
                                 .onTapGesture {
+//                                    $vm.handleTap(tapSpot: Location(row, col))
                                 }
-                            getMobView(row: row, col: col).frame(maxWidth: .infinity, maxHeight: .infinity)
+                            getMobView(row, col).frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
                         
                     }
                 }
             }
         }
+    
     }
-    func getMobView(row: Int, col: Int) -> some View {
+    func getMobView(_ row: Int, _ col: Int) -> some View {
         var mobNames = ""
         for mob in vm.mobs {
             if mob.location.row == row &&
@@ -57,11 +63,18 @@ struct GridView: View {
         }
         return Text(mobNames).font(.system(size: 40))
     }
+    
+    
 }
 struct ContentView: View {
+    @State var turns = 0
     @State var isPlaying = false
-    var timer = Timer.publish(every: 1.0 , on: .main, in: .common).autoconnect()
+    var timer = Timer.publish(every:1 , on: .main, in: .common).autoconnect()
     @StateObject var vm = WorldVM()
+    @State var CiviPoints = 0
+    @State var SiviPoints = 0
+    
+
     
     var body: some View {
         VStack {
@@ -72,8 +85,15 @@ struct ContentView: View {
             .onReceive(timer) { _ in
                 if isPlaying {
                     for index in 0..<vm.mobs.count {
-                        _ = vm.mobs[index].doMovementBehavior(mobs: vm.mobs)
+                        for _ in 0..<vm.mobs[index].speed {
+//                            if (vm.mobs[index].name == "x" && vm.mobs[index].name == "o"){
+//                                vm.mobs.remove(at: index)
+//                            }
+                            _ = vm.mobs[index].doMovementBehavior(vm.mobs)
+                        }
+    
                     }
+
                 }
             }
             HStack{
@@ -84,11 +104,19 @@ struct ContentView: View {
                 }
                 Button {
                     for index in 0..<vm.mobs.count {
-                        _ = vm.mobs[index].doMovementBehavior(mobs: vm.mobs)
+                        for _ in 0..<vm.mobs[index].speed {
+//                            if (vm.mobs[index].name == "x" && vm.mobs[index].name == "o"){
+//                                vm.mobs.remove(at: index)
+//                            }
+                            _ = vm.mobs[index].doMovementBehavior(vm.mobs)
+                          
+                        }
                     }
+    
                 } label: {
                     Text("Next")
                 }
+                
             }
         }
     }

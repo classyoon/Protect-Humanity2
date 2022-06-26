@@ -11,7 +11,7 @@ import XCTest
 class Protect_HumanityTests: XCTestCase {
 
     func testLocationInitialization() throws {
-        let sut = Location(row: 1, col: 3)
+        let sut = Location(1, 3)
         
         XCTAssertEqual(sut.row, 1)
         XCTAssertEqual(sut.col, 3)
@@ -22,7 +22,7 @@ class Protect_HumanityTests: XCTestCase {
         var sut = Zombie()
         	
         // When
-        sut.moveTo(target: Location(row: 1, col: 3))
+        sut.moveTo(Location(1, 3))
         
         // Then
         XCTAssertEqual(sut.location.row, 1)
@@ -33,7 +33,7 @@ class Protect_HumanityTests: XCTestCase {
         var sut = Zombie()
             
         // When
-        sut.moveTo(target: Location(row: Constants.rowMax + 1, col:Constants.colMax + 3 ))
+        sut.moveTo(Location(Constants.rowMax + 1, Constants.colMax + 3 ))
         
         // Then
         XCTAssertEqual(sut.location.row, 1)
@@ -42,18 +42,18 @@ class Protect_HumanityTests: XCTestCase {
 
     func testMoveTowardsExample1 () throws {
         var sut = Zombie()
-        sut.moveTo(target: Location(row: 0, col: 0  ))
-        sut.setTarget(newTarget: Location(row: 0, col: 0))
+        sut.moveTo(Location(0, 0  ))
+        sut.setTarget(Location(0, 0))
         
         XCTAssertEqual(sut.location.row, 0)
         XCTAssertEqual(sut.location.col, 0)
 
-        sut.setTarget(newTarget: Location(row: 0, col: 1))
+        sut.setTarget(Location(0, 1))
         sut.moveTowardsTarget()
         XCTAssertEqual(sut.location.row, 0)
         XCTAssertEqual(sut.location.col, 1)
         
-        sut.setTarget(newTarget: Location(row: 1, col: 2))
+        sut.setTarget(Location(1, 2))
         sut.moveTowardsTarget()
         XCTAssertEqual(sut.location.row, 1)
         XCTAssertEqual(sut.location.col, 2)
@@ -61,13 +61,13 @@ class Protect_HumanityTests: XCTestCase {
     }
     func testMoveTowardsExample2 () throws {
         var sut = Zombie()
-        sut.moveTo(target: Location(row: 0, col: 0  ))
-        sut.setTarget(newTarget: Location(row: 0, col: 0))
+        sut.moveTo(Location(0, 0  ))
+        sut.setTarget(Location(0, 0))
         
         XCTAssertEqual(sut.location.row, 0)
         XCTAssertEqual(sut.location.col, 0)
 
-        sut.setTarget(newTarget: Location(row: 0, col: 3))
+        sut.setTarget(Location(0, 3))
         sut.moveTowardsTarget()
         sut.moveTowardsTarget()
         sut.moveTowardsTarget()
@@ -78,35 +78,35 @@ class Protect_HumanityTests: XCTestCase {
     }
 
     func testZombieMovementBehavior() throws {
-        let civi = Civi(target: Location(row: 5, col: 3), location: Location(row: 5, col: 3))
-        var sut = Zombie(target: Location(row: 0, col: 0), location: Location(row: 0, col: 0))
+        let civi = Civi(target: Location(5, 3), location: Location(5, 3))
+        var sut = Zombie(target: Location(0, 0), location: Location(0, 0))
         
         var mobs : [MobileEntity] = [
         sut, civi
         ]
     
-        mobs = sut.doMovementBehavior(mobs: mobs)
-        mobs = sut.doMovementBehavior(mobs: mobs)
-        mobs = sut.doMovementBehavior(mobs: mobs)
-        mobs = sut.doMovementBehavior(mobs: mobs)
-        mobs = sut.doMovementBehavior(mobs: mobs)
+        mobs = sut.doMovementBehavior(mobs)
+        mobs = sut.doMovementBehavior(mobs)
+        mobs = sut.doMovementBehavior(mobs)
+        mobs = sut.doMovementBehavior(mobs)
+        mobs = sut.doMovementBehavior(mobs)
         
        
         XCTAssertEqual(sut.location.row, 5)
         XCTAssertEqual(sut.location.col, 3)
     }
     func testCiviMovementBehavior() throws {
-        var sut = Civi(target: Location(row: 0, col: 1), location: Location(row: 0, col: 1))
-        let zombie = Zombie(target: Location(row: 0, col: 0), location: Location(row: 0, col: 0))
+        var sut = Civi(target: Location(0, 1), location: Location(0, 1))
+        let zombie = Zombie(target: Location(0, 0), location: Location(0, 0))
         
         var mobs : [MobileEntity] = [
         zombie, sut
         ]
     
-        mobs = sut.doMovementBehavior(mobs: mobs)
+        mobs = sut.doMovementBehavior(mobs)
        
         XCTAssertEqual(sut.location.row, 1)
-        XCTAssertEqual(sut.location.col, 2)
+        XCTAssertEqual(sut.location.col, 1)
     }
     
 }

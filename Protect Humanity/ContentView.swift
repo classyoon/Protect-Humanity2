@@ -11,24 +11,30 @@ import SwiftUI
 
 struct WorldView: View {
     @ObservedObject var vm : WorldVM
+    
+    private func opacityCalcuator(row: Int, col: Int) -> Double {
+        Double(vm.grid[row][col].counter) / Double(Constants.trailCount)
+    }
+    
     var body: some View {
         VStack{
             ForEach(0..<Constants.rowMax, id:\.self){ row in
                 HStack{
                     ForEach(0..<Constants.colMax, id:\.self){ col in
                         ZStack{
-                            Rectangle() .fill(Color.green)
+                            Rectangle().fill(Color.green)
+                                .overlay(Color.red.opacity(opacityCalcuator(row: row, col: col)))
                                 .onTapGesture {
                                     vm.handleTap(tapSpot: Location(row, col))
                                 }
-                            }
                         }
                     }
                 }
             }
         }
-
+    }
 }
+
 
 struct GridView: View {
     @ObservedObject var vm : WorldVM
@@ -42,7 +48,7 @@ struct GridView: View {
                         ZStack{
                             Rectangle() .fill(Color.clear)
                                 .onTapGesture {
-//                                    $vm.handleTap(tapSpot: Location(row, col))
+                                    //                                    $vm.handleTap(tapSpot: Location(row, col))
                                 }
                             getMobView(row, col).frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
@@ -51,7 +57,7 @@ struct GridView: View {
                 }
             }
         }
-    
+        
     }
     func getMobView(_ row: Int, _ col: Int) -> some View {
         var mobNames = ""
@@ -68,13 +74,13 @@ struct GridView: View {
 }
 struct ContentView: View {
     @State var turns = 0
-    @State var isPlaying = false
+    @State var isPlaying = false//.8
     var timer = Timer.publish(every:1 , on: .main, in: .common).autoconnect()
     @StateObject var vm = WorldVM()
     @State var CiviPoints = 0
     @State var SiviPoints = 0
     
-
+    
     
     var body: some View {
         VStack {
@@ -86,14 +92,15 @@ struct ContentView: View {
                 if isPlaying {
                     for index in 0..<vm.mobs.count {
                         for _ in 0..<vm.mobs[index].speed {
-//                            if (vm.mobs[index].name == "x" && vm.mobs[index].name == "o"){
-//                                vm.mobs.remove(at: index)
-//                            }
-                            _ = vm.mobs[index].doMovementBehavior(vm.mobs)
+                            //                            if (vm.mobs[index].name == "x" && vm.mobs[index].name == "o"){
+                            //                                vm.mobs.remove(at: index)
+                            //                            }
+                            _ = vm.mobs[index].doMovementBehavior(vm.mobs, vm: vm)
+                            vm.clockTick()
                         }
-    
+                        
                     }
-
+                    
                 }
             }
             HStack{
@@ -105,14 +112,14 @@ struct ContentView: View {
                 Button {
                     for index in 0..<vm.mobs.count {
                         for _ in 0..<vm.mobs[index].speed {
-//                            if (vm.mobs[index].name == "x" && vm.mobs[index].name == "o"){
-//                                vm.mobs.remove(at: index)
-//                            }
-                            _ = vm.mobs[index].doMovementBehavior(vm.mobs)
-                          
+                            //                            if (vm.mobs[index].name == "x" && vm.mobs[index].name == "o"){
+                            //                                vm.mobs.remove(at: index)
+                            //                            }
+                            _ = vm.mobs[index].doMovementBehavior(vm.mobs, vm: vm)
+                            
                         }
                     }
-    
+                    
                 } label: {
                     Text("Next")
                 }

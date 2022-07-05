@@ -7,24 +7,44 @@
 
 import Foundation
 struct Constants {
-    static let colMax = 10
-    static let rowMax = 10
+    static let colMax = 9
+    static let rowMax = 9
+    static var UniversalCiviSpeed = 1
+    static var ZombieSpeed = 1
+    static var ZombieDamageToCivi = 1
+    static var SoldierDamageToZom = 0
+    static let trailCount = 7
     
     static func safeRow(_ row: Int)-> Int {//INOUT????
-        let r = row % Constants.rowMax
-        if r < 0 {
-            return r + Constants.rowMax
+        //        let r = row % rowMax
+        if row < 0 {
+            return 0//r + rowMax
         }
-        return r
+        if row>rowMax-1{
+            return rowMax-1
+        }
+        return row
     }
-   static func safeCol(_ col: Int)-> Int {
-       let c = col % Constants.colMax
-       if c < 0 {
-           return c + Constants.colMax
-       }
-       return c
+    static func safeCol(_ col: Int)-> Int {
+        // let c = col % colMax
+        if col < 0 {
+            return 0//c + colMax
+        }
+        if col>colMax-1{
+            return colMax-1
+        }
+        return col
     }
+    /**
+     static func safeCol(_ col: inout Int) {
+     col = col % colMax
+     if col < 0 {
+     col+=colMax
+     }
+     }
+     */
     static func hypotenus(row: Int, col: Int) -> Double{
         sqrt( Double(row*row + col*col))
     }
+    
 }

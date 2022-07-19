@@ -39,7 +39,7 @@ class WorldVM : ObservableObject {
                     //select soldier underneath location and notify slection
                     selectedSoldier = (mob as! Soldier)
                     //                    print("Awaiting Orders")
-
+                    
                     firstTap = false
                     break
                 }
@@ -85,7 +85,7 @@ class WorldVM : ObservableObject {
     func statusTile(_ row: Int, _ col: Int){
         
     }
-
+    
     let randomLoc: () ->Location = {Location(Int.random(in: 0...Constants.rowMax-1), Int.random(in: 0...Constants.colMax-1))}
     
     let center: () ->Location = { Location(Constants.rowMax/2, Constants.colMax/2)}
@@ -106,32 +106,35 @@ class WorldVM : ObservableObject {
         
         
         
-//                    mobs.append(Zombie(location: center()))
+        //                    mobs.append(Zombie(location: center()))
         //GLITCH ONE
-//        mobs.append(Sivi(location: Location(1, 1)))
-//        mobs.append(Soldier(target: Location(2, 2), location: Location(2, 2)))
+        //        mobs.append(Sivi(location: Location(1, 1)))
+        //        mobs.append(Soldier(target: Location(2, 2), location: Location(2, 2)))
         //Glitch TWO
-//
-//                mobs.append(Soldier(target: centerLeft(), location: centerLeft()))
+        //
+        //                mobs.append(Soldier(target: centerLeft(), location: centerLeft()))
         
-        mobs.append(Sivi(location: center()))
-                    mobs.append(Civi(location:  center()))//Is able to run away
-                    mobs.append(Dummy(location: center()))//Literally a single braincell
-        mobs.append(Sivi(location: center()))
-                    mobs.append(Civi(location:  center()))//Is able to run away
-                    mobs.append(Dummy(location: center()))//Literally a single braincell
-        mobs.append(Sivi(location: center()))
-                    mobs.append(Civi(location:  center()))//Is able to run away
-                    mobs.append(Dummy(location: center()))//Literally a single braincell
+        //        mobs.append(Sivi(location: randomLoc()))
+        //                    mobs.append(Civi(location:  randomLoc()))//Is able to run away
+        //                    mobs.append(Dummy(location: randomLoc()))//Literally a single braincell
+        //        mobs.append(Sivi(location: randomLoc()))
+        //                    mobs.append(Civi(location:  randomLoc()))//Is able to run away
+        //                    mobs.append(Dummy(location: randomLoc()))//Literally a single braincell
+        mobs.append(Sivi(location: randomLoc()))
+        //                    mobs.append(Civi(location:  randomLoc()))//Is able to run away
+        //                    mobs.append(Dummy(location: randomLoc()))//Literally a single braincell
         
         
-        //        mobs.append(Soldier(location: randomLoc()))
-        //        mobs.append(Soldier(location: randomLoc()))
+        //                mobs.append(Soldier(location: randomLoc()))
+        //                mobs.append(Soldier(location: randomLoc()))
         
-        //        mobs.append(Civi(location: Location(9, 9)))//has a death wish
-        
-        //        mobs.append(Dummy(location: Location(9, 9)))
-                        mobs.append(Zombie(location: center()))
+        mobs.append(Civi(location: randomLoc()))
+        mobs.append(Dummy(location: randomLoc()))
+      
+        mobs.append(Civi2(location: randomLoc()))
+        mobs.append(Zombie(location: randomLoc()))
+        mobs.append(Zombie(location: randomLoc()))
+    
         
     }
 }

@@ -7,13 +7,13 @@
 
 import Foundation
 struct Constants {
-    static let colMax = 9
-    static let rowMax = 9
+    static let colMax = 7
+    static let rowMax = 7
     static var UniversalCiviSpeed = 1
     static var ZombieSpeed = 1
     static var ZombieDamageToCivi = 1
-    static var SoldierDamageToZom = 0
-    static let trailCount = 7
+    static var SoldierDamageToZom = 2
+    static let trailCount = 0
     
     static func safeRow(_ row: Int)-> Int {//INOUT????
         //        let r = row % rowMax

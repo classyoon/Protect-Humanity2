@@ -41,6 +41,8 @@ protocol MobileEntity {
     mutating func moveTowardsTarget()
     mutating func setTarget(_ newTarget : Location)
     mutating func doMovementBehavior(_ mobs: [MobileEntity], vm: WorldVM) -> [MobileEntity]// inout
+    
+    mutating func calcDamage(_ mobs: [MobileEntity], vm: WorldVM) -> [MobileEntity]// inout
     func findNearest (_ entity : String, _ mobs : [MobileEntity]) ->(distanceOf: Int, indexOf : Int?, colDistance : Int, rowDistance : Int, rowDifference : Int, colDifference : Int)
 }
 extension MobileEntity {
@@ -107,16 +109,36 @@ extension MobileEntity {
             finalColDifference = mobs[0].location.col - self.location.col
         }
         //        print("\(entity), Distance : \(shortestDistance), Index : \(nearestIndex), Row Distance: \(finalRowDistance), Col Distance \(finalColDistance), Difference Row : \(finalRowDifference), Difference Col : \(finalColDifference)")
+        
         return (shortestDistance, nearestIndex, finalRowDistance, finalColDistance, finalRowDifference, finalColDifference)
     }
+    func calcDamage(_ name: inout String, faction : inout String, enemy: String, _ mobs : [MobileEntity], _ hp : inout Int, _ damageSource: Int, _ speed : inout Int, deathFace : String){
+//        print("Thinking")
+          var dangerList = [MobileEntity]()
+          for index in 0..<mobs.count {//compiles zombies into list
+              if mobs[index].faction==enemy{
+                  dangerList.append(mobs[index])
+              }
+          }
+          for badguy in dangerList {
+              if location == badguy.location {
+                  hp-=damageSource
+                  print("\(name) : \(hp)")
+              }
+          }
+          if hp <= 0{
+              speed = 0
+              faction = "x"
+              print("\(name) : Dead after \(lifespan)")
+              name = deathFace
+          }
+      }
 }
 
 
 struct Zombie : MobileEntity, Identifiable {
+    
     var faction = "Z"
-    
-    
-    
     var speed = Constants.ZombieSpeed
     var name = "🧟"
     var id = UUID()
@@ -125,49 +147,42 @@ struct Zombie : MobileEntity, Identifiable {
     var hp: Int = 5
     var attacking : Bool = false
     var lifespan = 0
+    mutating func calcDamage(_ mobs: [MobileEntity], vm: WorldVM) -> [MobileEntity] {
+//        print("OW")
+        calcDamage(&name, faction: &faction, enemy: "S", mobs, &hp, Constants.SoldierDamageToZom, &speed, deathFace: "o")
+        return mobs
+    }
+    
     mutating func doMovementBehavior(_ mobs: [MobileEntity], vm: WorldVM)->[MobileEntity]{
         lifespan+=1
-        if hp <= 0{
-            speed = 0
-            name = "o"
-            faction = "Dead"
-            return mobs
-        }
+      
         let prey = findNearest("C", mobs)
-        if prey.distanceOf == 0 {
-            //            print("Nom \(lifespan)")
-            return mobs
-        }
         if prey.distanceOf == Int.max {
-            target = Location(Int.random(in: -1...1), Int.random(in: -1...1))
+            target = Location(location.row+Int.random(in: -1...1), location.col+Int.random(in: -1...1))
             moveTowardsTarget()
             return mobs
         }
-        if let index = prey.indexOf {
-            if Int.random(in: 0...3) == 1{
-                //              print("Stumble")
-                return mobs
-            }else {
+        else if let index = prey.indexOf {
+            if (Int.random(in: 0...1)==1) {
                 setTarget(mobs[index].location)
                 moveTowardsTarget()
             }
-        }
-        
-        
-        for index in 0..<mobs.count {
-            if (mobs[index].faction == "S") && (mobs[index].location == location) {
-                hp -= Constants.SoldierDamageToZom
-                if Int.random(in: 0...1) == 1{
-                    //                  print("Stunned")
-                    return mobs
-                }
+                else{
+                return mobs
             }
         }
+        
+        
         return mobs
     }
 }
 
 struct Civi : MobileEntity, Identifiable {
+    mutating func calcDamage(_ mobs: [MobileEntity], vm: WorldVM) -> [MobileEntity] {
+        calcDamage(&name, faction: &faction, enemy: "Z", mobs, &hp, Constants.ZombieDamageToCivi, &speed, deathFace: "x")
+        return mobs
+    }
+    
     var faction = "C"
     var speed = Constants.UniversalCiviSpeed
     var name = "😃"
@@ -185,15 +200,13 @@ struct Civi : MobileEntity, Identifiable {
         
         //        print("I am scared of \(danger.distanceOf)")
       
-        
-        
-        if hp <= 0{
-            speed = 0
-            name = "x"
-            print("Civi : Dead after \(lifespan)")
-            faction = "Dead"
-            return mobs
+        var ZList = [MobileEntity]()
+        for index in 0..<mobs.count {//compiles zombies into list
+            if mobs[index].faction=="Z"{
+                ZList.append(mobs[index])
+            }
         }
+
         
         
         if danger.distanceOf < Int.max {
@@ -233,12 +246,8 @@ struct Civi : MobileEntity, Identifiable {
         }
         
         moveTowardsTarget()
-        if let index = danger.indexOf {
-            if mobs[index].location==location && !(hp<=0) && mobs[index].name == "🧟" {
-                hp-=Constants.ZombieDamageToCivi
-                print("Civi : \(hp)")
-            }
-        }
+        
+       
         lifespan+=1
         return mobs
         
@@ -248,6 +257,11 @@ struct Civi : MobileEntity, Identifiable {
 }
 
 struct Soldier : MobileEntity, Identifiable {
+    mutating func calcDamage(_ mobs: [MobileEntity], vm: WorldVM) -> [MobileEntity] {
+        calcDamage(&name, faction: &faction, enemy: "Z", mobs, &hp, 1, &speed, deathFace: "*")
+        return mobs
+    }
+    
     var faction = "S"
     var lifespan = 0
     
@@ -275,6 +289,11 @@ struct Soldier : MobileEntity, Identifiable {
 }
 
 struct Sivi : MobileEntity, Identifiable {
+    mutating func calcDamage(_ mobs: [MobileEntity], vm: WorldVM) -> [MobileEntity] {
+        calcDamage(&name, faction: &faction, enemy: "Z", mobs, &hp, Constants.ZombieDamageToCivi, &speed, deathFace: "S")
+        return mobs
+    }
+    
     var faction = "C"
     
     var speed = Constants.UniversalCiviSpeed
@@ -293,15 +312,13 @@ struct Sivi : MobileEntity, Identifiable {
         //        print("Sivi")
         markLocation(vm: vm)
         let danger = findNearest("Z", mobs)
-        
-        
-        if hp <= 0{
-            speed = 0
-            name = "s"
-            print("Sivi : Dead after \(lifespan)")
-            faction = "Dead"
-            return mobs
+        var ZList = [MobileEntity]()
+        for index in 0..<mobs.count {//compiles zombies into list
+            if mobs[index].faction=="Z"{
+                ZList.append(mobs[index])
+            }
         }
+
         
         var rowDelta = 0
         var colDelta = 0
@@ -351,12 +368,7 @@ struct Sivi : MobileEntity, Identifiable {
         setTarget(Location(Constants.safeRow(location.row + rowDelta), Constants.safeCol(location.col + colDelta)))
         //        print(target)
         moveTowardsTarget()
-        if let index = danger.indexOf {
-            if mobs[index].location==location && !(hp<=0) && mobs[index].name == "🧟" {
-                hp-=Constants.ZombieDamageToCivi
-                print("Sivi : \(hp)")
-            }
-        }
+       
         lifespan+=1
         return mobs
         
@@ -366,6 +378,11 @@ struct Sivi : MobileEntity, Identifiable {
 }
 
 struct Dummy : MobileEntity, Identifiable {
+    mutating func calcDamage(_ mobs: [MobileEntity], vm: WorldVM) -> [MobileEntity] {
+        calcDamage(&name, faction: &faction, enemy: "Z", mobs, &hp, Constants.ZombieDamageToCivi, &speed, deathFace: "D")
+        return mobs
+    }
+    
     var faction = "C"
     var speed = Constants.UniversalCiviSpeed
     //var name = "😃"
@@ -380,21 +397,11 @@ struct Dummy : MobileEntity, Identifiable {
     }
     mutating func doMovementBehavior(_ mobs: [MobileEntity], vm: WorldVM)->[MobileEntity]{
         markLocation(vm: vm)
-        //        print("Dummy")
-        let danger = findNearest("Z", mobs)
-        //        print("I am scared of \(danger.distanceOf)")
-        //        if name == "🖤" {
-        //            name="😃"
-        //        }
-       
-        if hp == 0{
-            speed = 0
-            name = "d"
-            
-            print("Dummy : Dead after \(lifespan)")
-            faction = "Dead"
-            return mobs
-            
+        var ZList = [MobileEntity]()
+        for index in 0..<mobs.count {//compiles zombies into list
+            if mobs[index].faction=="Z"{
+                ZList.append(mobs[index])
+            }
         }
         
         var rowDelta = 0
@@ -406,19 +413,7 @@ struct Dummy : MobileEntity, Identifiable {
         
         
         moveTowardsTarget()
-        if let index = danger.indexOf {
-            if mobs[index].location==location && !(hp<=0) && mobs[index].faction == "Z" {
-                hp-=Constants.ZombieDamageToCivi
-                print("Dummy : \(hp)")
-                //                name = "🖤"
-            }
-        }
-        if let index = danger.indexOf {
-            if mobs[index].location==location && !(hp<=0) && mobs[index].faction == "Z" {//"🧟" {
-                hp-=Constants.ZombieDamageToCivi
-                print("Sivi : \(hp)")
-            }
-        }
+   
         lifespan+=1
         return mobs
         
@@ -426,88 +421,26 @@ struct Dummy : MobileEntity, Identifiable {
         
     }
 }
-/**
- if danger.rowDistance == 0 && danger.colDistance == 0
- rowDelta = Int.random(in: 0...1) == 0 ? -1 : 1
- colDelta = Int.random(in: 0...1) == 0 ? -1 : 1
- 
- if danger.rowDistance==1
- rowDelta = danger.rowDifference < 0 ? 1 : -1
- colDelta = Int.random(in: -1...1)
- 
- if danger.colDistance==1
- rowDelta = Int.random(in: -1...1)
- colDelta = danger.colDifference < 0 ? 1 : -1
- 
- if danger.colDistance==1 && danger.rowDistance==1
- if danger.rowDistance==1
- rowDelta = danger.rowDifference < 0 ? 1 : -1
- colDelta = Int.random(in: -1...1)
- 
- if danger.colDistance==1
- rowDelta = Int.random(in: -1...1)
- colDelta = danger.colDifference < 0 ? 1 : -1
- 
- 
- 
- random = Int.random(in: 0...1) == 0 ? -1 : 1
- 
- 
- 
- 
- 
- 
- if rowDifference==1
- col minus
- random row
- 
- if rowDifference==-1
- col plus
- random row
- 
- if both rowDifference and col Difference greater than 0
- randomly choose between either
- row plus and random col
- or
- col plus and random row
- or both
- 
- if both rowDifference and col Difference less than 0
- randomly choose between either
- row minus and random col
- or
- col minus and random row
- or both
- 
- if  rowDifference less than 0 but col Difference greater than 0
- randomly choose between either
- row minus and random col
- or
- col plus and random row
- or both
- 
- */
+
 
 struct Civi2 : MobileEntity,  Identifiable {
+    mutating func calcDamage(_ mobs: [MobileEntity], vm: WorldVM) -> [MobileEntity] {
+        calcDamage(&name, faction: &faction, enemy: "Z", mobs, &hp, Constants.ZombieDamageToCivi, &speed, deathFace: "2")
+        return mobs
+    }
+    
 //    let directions = [location
     var target = Location()
     var location = Location()
     var id = UUID()
     var hp = 5
-    var name = "👦"
-    var speed = 1
+    var name = "👦🏼"
+    var speed = Constants.UniversalCiviSpeed
     var lifespan = 0
     var faction = "C"
     
     mutating func doMovementBehavior(_ mobs: [MobileEntity], vm: WorldVM) -> [MobileEntity] {
 
-        if hp <= 0{
-            speed = 0
-            name = "2"
-            print("Civi2 : Dead after \(lifespan)")
-            faction = "Dead"
-            return mobs
-        }
         
         let left = Constants.safeCol(location.col - speed)//Dynamic range finding
         let right = Constants.safeCol(location.col + speed)
@@ -520,12 +453,12 @@ struct Civi2 : MobileEntity,  Identifiable {
         var bestScore = -100
         var bestLocation = [location]
 //print("Turn \(lifespan)-----------")
+        
         for index in 0..<mobs.count {//compiles zombies into list
             if mobs[index].faction=="Z"{
                 ZList.append(mobs[index])
             }
         }
-        
         for y in above..<below+1{//Neighboring spots
             for x in left..<right+1{
                 
@@ -578,15 +511,83 @@ struct Civi2 : MobileEntity,  Identifiable {
         
 
         setTarget(bestLocation[Int.random(in: 0...bestLocation.count-1)])
+        
         moveTowardsTarget()
-        let danger = findNearest("Z", mobs)
-        if let index = danger.indexOf {
-            if mobs[index].location==location && !(hp<=0) && mobs[index].faction == "Z" {//"🧟" {
-                hp-=Constants.ZombieDamageToCivi
-                print("Civi2 : \(hp)")
+
+        lifespan+=1
+        return mobs
+    }
+    
+    
+}
+struct Carlo : MobileEntity, Identifiable  {
+    mutating func calcDamage(_ mobs: [MobileEntity], vm: WorldVM) -> [MobileEntity] {
+        calcDamage(&name, faction: &faction, enemy: "Z", mobs, &hp, Constants.ZombieDamageToCivi, &speed, deathFace: "C")
+        return mobs
+    }
+    
+    var target = Location()
+    var location = Location()
+    var id = UUID()
+    var hp = 5
+    var name = "🥸"
+    var speed = Constants.UniversalCiviSpeed
+    var lifespan = 0
+    var faction = "C"
+    
+    mutating func doMovementBehavior(_ mobs: [MobileEntity], vm: WorldVM) -> [MobileEntity] {
+        var ZList = [MobileEntity]()
+        for index in 0..<mobs.count {//compiles zombies into list
+            if mobs[index].faction=="Z"{
+                ZList.append(mobs[index])
             }
         }
+        
+        let left = Constants.safeCol(location.col - speed)//Dynamic range finding
+        let right = Constants.safeCol(location.col + speed)
+        let above = Constants.safeRow(location.row - speed)
+        let below = Constants.safeRow(location.row + speed)
+        
+        let riskPenalty = 1
+        var bestScore = -100
+        var bestLocation = [location]
+//print("Turn \(lifespan)-----------")
+
+        for y in above..<below+1{//Neighboring spots
+            for x in left..<right+1{
+                var safetyScore = 0
+                for index in 0..<ZList.count {
+
+                    let absRowDistance = abs(y - ZList[index].location.row)
+                    let absColDistance = abs(x - ZList[index].location.col)
+                    if (absRowDistance==1&&absColDistance==0)||(absRowDistance==0&&absColDistance==1)||(absRowDistance==1&&absColDistance==1){
+                        safetyScore-=riskPenalty
+                    }
+                    if(absRowDistance==0&&absColDistance==0){
+                        safetyScore-=riskPenalty*2
+                    }
+                    
+                }
+                if safetyScore>bestScore{
+                    bestScore=safetyScore
+                    bestLocation=[Location(y,x)]
+//                    print("Best Score \(bestScore)")
+//                    print("Best Location \(bestLocation)")
+                    
+                }
+                else if safetyScore==bestScore{
+                    bestLocation.append(Location(y,x))
+                }
+                
+            }
+
+        }
+        setTarget(bestLocation[Int.random(in: 0...bestLocation.count-1)])
+        
+        moveTowardsTarget()
+
         lifespan+=1
+        
         return mobs
     }
     

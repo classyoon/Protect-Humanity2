@@ -103,38 +103,26 @@ class WorldVM : ObservableObject {
     init(){
         grid = Array(repeating: Array(repeating: Tile(), count: Constants.colMax), count: Constants.rowMax)
         
+//        mobs.append(Civi(location:  randomLoc()))//Is able to run away
+//        mobs.append(Dummy(location: randomLoc()))//Literally a single braincell
+//         mobs.append(Civi2(location: Location(1,1)))
+//        mobs.append(Sivi(location: randomLoc()))
+//        mobs.append(Civi2(location: Location(1,1)))
+//        mobs.append(Civi2(location: Location(1,1)))
+//        mobs.append(Soldier(location: Location(1,1)))
+
+        for _ in 0..<10 {
+            mobs.append(Zombie(location: randomLoc()))
+//            mobs.append(Soldier(location: randomLoc()))
+//            mobs.append(Dummy(location: randomLoc()))//Literally a single braincell
+//            mobs.append(Civi(location:  randomLoc()))//Is able to run away
+//            mobs.append(Sivi(location: randomLoc()))
+            mobs.append(Carlo(location: randomLoc()))
+            mobs.append(Civi2(location: randomLoc()))
+            
+        }
         
-        
-        
-        //                    mobs.append(Zombie(location: center()))
-        //GLITCH ONE
-        //        mobs.append(Sivi(location: Location(1, 1)))
-        //        mobs.append(Soldier(target: Location(2, 2), location: Location(2, 2)))
-        //Glitch TWO
-        //
-        //                mobs.append(Soldier(target: centerLeft(), location: centerLeft()))
-        
-        //        mobs.append(Sivi(location: randomLoc()))
-        //                    mobs.append(Civi(location:  randomLoc()))//Is able to run away
-        //                    mobs.append(Dummy(location: randomLoc()))//Literally a single braincell
-        //        mobs.append(Sivi(location: randomLoc()))
-        //                    mobs.append(Civi(location:  randomLoc()))//Is able to run away
-        //                    mobs.append(Dummy(location: randomLoc()))//Literally a single braincell
-        mobs.append(Sivi(location: randomLoc()))
-        //                    mobs.append(Civi(location:  randomLoc()))//Is able to run away
-        //                    mobs.append(Dummy(location: randomLoc()))//Literally a single braincell
-        
-        
-        //                mobs.append(Soldier(location: randomLoc()))
-        //                mobs.append(Soldier(location: randomLoc()))
-        
-        mobs.append(Civi(location: randomLoc()))
-        mobs.append(Dummy(location: randomLoc()))
-      
-        mobs.append(Civi2(location: randomLoc()))
-        mobs.append(Zombie(location: randomLoc()))
-        mobs.append(Zombie(location: randomLoc()))
-    
+//
         
     }
 }

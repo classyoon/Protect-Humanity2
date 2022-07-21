@@ -75,7 +75,7 @@ struct GridView: View {
 struct ContentView: View {
     @State var turns = 0
     @State var isPlaying = false//.8
-    var timer = Timer.publish(every:1 , on: .main, in: .common).autoconnect()
+    var timer = Timer.publish(every:1  , on: .main, in: .common).autoconnect()
     @StateObject var vm = WorldVM()
     @State var CiviPoints = 0
     @State var SiviPoints = 0
@@ -92,15 +92,14 @@ struct ContentView: View {
                 if isPlaying {
                     for index in 0..<vm.mobs.count {
                         for _ in 0..<vm.mobs[index].speed {
-                            //                            if (vm.mobs[index].name == "x" && vm.mobs[index].name == "o"){
-                            //                                vm.mobs.remove(at: index)
-                            //                            }
                             _ = vm.mobs[index].doMovementBehavior(vm.mobs, vm: vm)
-                            vm.clockTick()
                         }
-                        
                     }
-                    
+                    //calculate damage all at once
+                    for index in 0..<vm.mobs.count {
+                            _ = vm.mobs[index].calcDamage(vm.mobs, vm: vm)
+                    }
+                    vm.clockTick()
                 }
             }
             HStack{
@@ -118,6 +117,10 @@ struct ContentView: View {
                             _ = vm.mobs[index].doMovementBehavior(vm.mobs, vm: vm)
                             
                         }
+                    }
+                    //calculate damage all at once
+                    for index in 0..<vm.mobs.count {
+                            _ = vm.mobs[index].calcDamage(vm.mobs, vm: vm)
                     }
                     
                 } label: {

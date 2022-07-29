@@ -15,6 +15,11 @@
 		CA592F52285A816600DB9C6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA592F51285A816600DB9C6E /* Assets.xcassets */; };
 		CA592F55285A816600DB9C6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA592F54285A816600DB9C6E /* Preview Assets.xcassets */; };
 		CA9A7734285F96FC008BF79B /* Protect_HumanityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9A7733285F96FC008BF79B /* Protect_HumanityTests.swift */; };
+		CAC02065288D868B00D3F2CA /* PracticeForEach.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC02064288D868B00D3F2CA /* PracticeForEach.swift */; };
+		CAC02067288D8C4B00D3F2CA /* MobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC02066288D8C4B00D3F2CA /* MobView.swift */; };
+		CAC02069288D9F4800D3F2CA /* Zombie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC02068288D9F4800D3F2CA /* Zombie.swift */; };
+		CAC0206B288DA64C00D3F2CA /* Civi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC0206A288DA64C00D3F2CA /* Civi.swift */; };
+		CAC0206D288DA69F00D3F2CA /* Soldier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC0206C288DA69F00D3F2CA /* Soldier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +43,11 @@
 		CA592F54285A816600DB9C6E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CA9A7731285F96FC008BF79B /* Protect_HumanityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Protect_HumanityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA9A7733285F96FC008BF79B /* Protect_HumanityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protect_HumanityTests.swift; sourceTree = "<group>"; };
+		CAC02064288D868B00D3F2CA /* PracticeForEach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeForEach.swift; sourceTree = "<group>"; };
+		CAC02066288D8C4B00D3F2CA /* MobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobView.swift; sourceTree = "<group>"; };
+		CAC02068288D9F4800D3F2CA /* Zombie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zombie.swift; sourceTree = "<group>"; };
+		CAC0206A288DA64C00D3F2CA /* Civi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Civi.swift; sourceTree = "<group>"; };
+		CAC0206C288DA69F00D3F2CA /* Soldier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soldier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +93,12 @@
 				CA592F4D285A816500DB9C6E /* Protect_HumanityApp.swift */,
 				CA592F4F285A816500DB9C6E /* ContentView.swift */,
 				CA2F0FDF285FE7F80037B8C6 /* WorldVM.swift */,
+				CAC02066288D8C4B00D3F2CA /* MobView.swift */,
+				CAC02064288D868B00D3F2CA /* PracticeForEach.swift */,
 				CA2F0FDD285FE7C30037B8C6 /* Mobile Entities.swift */,
+				CAC0206C288DA69F00D3F2CA /* Soldier.swift */,
+				CAC0206A288DA64C00D3F2CA /* Civi.swift */,
+				CAC02068288D9F4800D3F2CA /* Zombie.swift */,
 				CA592F51285A816600DB9C6E /* Assets.xcassets */,
 				CA592F53285A816600DB9C6E /* Preview Content */,
 			);
@@ -207,10 +222,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA592F50285A816500DB9C6E /* ContentView.swift in Sources */,
+				CAC02065288D868B00D3F2CA /* PracticeForEach.swift in Sources */,
+				CAC0206B288DA64C00D3F2CA /* Civi.swift in Sources */,
 				CA2F0FDE285FE7C30037B8C6 /* Mobile Entities.swift in Sources */,
 				CA2F0FE0285FE7F80037B8C6 /* WorldVM.swift in Sources */,
 				CA592F4E285A816500DB9C6E /* Protect_HumanityApp.swift in Sources */,
+				CAC0206D288DA69F00D3F2CA /* Soldier.swift in Sources */,
+				CAC02069288D9F4800D3F2CA /* Zombie.swift in Sources */,
 				CA2F0FDC285FE5B70037B8C6 /* Constants.swift in Sources */,
+				CAC02067288D8C4B00D3F2CA /* MobView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
